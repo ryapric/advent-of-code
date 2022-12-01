@@ -1,9 +1,11 @@
 #!/usr/bin/env -S gawk -f
 
 {
+  # Empty lines indicate that we've moved on to the next elf
   if (length($0) > 0) {
     elfCalories += $0
   } else {
+    # Does awk have case statements? Eugh.
     if (elfCalories > mostCalories) {
       mostCalories = elfCalories
     } else if (elfCalories > secondMostCalories) {
@@ -17,7 +19,9 @@
 }
 
 END {
+  # Part 1
   printf("Elf with the most has this many calories: %d\n", mostCalories)
 
+  # Part 2
   printf("The top three elves have this many calories: %d\n", mostCalories + secondMostCalories + thirdMostCalories)
 }
