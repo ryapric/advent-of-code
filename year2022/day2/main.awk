@@ -3,15 +3,15 @@
 BEGIN {
   # Map of round matchups where the left letter is their move and the right is mine
   # A & X are rock, B & Y are paper, C & Z are scissors
-  matchup["A X"] = "draw"
-  matchup["A Y"] = "win"
-  matchup["A Z"] = "loss"
-  matchup["B X"] = "draw"
-  matchup["B Y"] = "win"
-  matchup["B Z"] = "loss"
-  matchup["C X"] = "draw"
-  matchup["C Y"] = "win"
-  matchup["C Z"] = "loss"
+  matchup["A X"] = "draw" # rock, rock
+  matchup["A Y"] = "win"  # rock, paper
+  matchup["A Z"] = "loss" # rock, scissors
+  matchup["B X"] = "loss" # paper, rock
+  matchup["B Y"] = "draw" # paper, paper
+  matchup["B Z"] = "win"  # paper, scissors
+  matchup["C X"] = "win"  # scissors, rock
+  matchup["C Y"] = "loss" # scissors, paper
+  matchup["C Z"] = "draw" # scissors, scissors
 
   # Scoring
   shape_score["X"] = 1
