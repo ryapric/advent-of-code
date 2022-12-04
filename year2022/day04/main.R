@@ -5,3 +5,6 @@ ranges <- lapply(input, function(x) {
 })
 all_captured_count <- sum(sapply(ranges, function(x) all(x[[1]] %in% x[[2]]) || all(x[[2]] %in% x[[1]])))
 print(paste("How many ranges fully overlap:", all_captured_count))
+
+any_captured_count <- sum(sapply(ranges, function(x) any(x[[1]] %in% x[[2]]) || any(x[[2]] %in% x[[1]])))
+print(paste("How many ranges overlap at all:", any_captured_count))
