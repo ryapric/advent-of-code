@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 input <- readLines("./input.txt")
 
 ranges <- lapply(input, function(x) {

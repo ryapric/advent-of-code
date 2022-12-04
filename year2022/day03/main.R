@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 input <- readLines("./input.txt")
 
 # This splits each line into its rucksack compartment components
