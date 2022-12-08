@@ -50,10 +50,11 @@ done < "${input}"
 all_subdirs='/tmp/AoCY22D07_all_subdirs'
 subdirs_meta='/tmp/AoCY22D07_subdirs_meta'
 
-find "${root}"/* -type d > "${all_subdirs}"
+find "${root}" -type d > "${all_subdirs}"
 
 rm -f "${subdirs_meta}"
 while read -r subdir ; do
+  # if [[ "${subdir}" == "${root}" ]] ; then continue ; fi
   printf '%s %s %s\n' \
     "${subdir}" \
     "$(find "${subdir}" -type d | wc -l)" \
@@ -65,3 +66,13 @@ done < "${all_subdirs}"
 # the under-100k check
 dirs_under_100k="$(awk '{ $3 -= (4096 * $2) ; if ($3 < 100000) sum += $3 } END { print sum }' "${subdirs_meta}")"
 printf 'Sum of dirs & subdirs under 100k each: %s\n' "${dirs_under_100k}"
+
+### Part 2
+total_space='70000000'
+required_free_space='30000000'
+used_space="$(awk '{ $3 -= (4096 * $2) ; print $3 }' "${subdirs_meta}" | sort -h -r | head -n1)"
+remaining_space="$(( total_space - used_space ))"
+need_to_free="$(( required_free_space - remaining_space ))"
+
+smallest_dir_size_to_delete="$(awk -v need_to_free=${need_to_free} '{ $3 -= (4096 * $2) ; if ($3 >= need_to_free) print $3 }' /tmp/AoCY22D07_subdirs_meta | sort -h | head -n1)"
+printf 'Size of smallest dir to delete to free up space: %s\n' "${smallest_dir_size_to_delete}"
